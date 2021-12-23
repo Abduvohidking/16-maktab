@@ -1,0 +1,345 @@
+{% extends 'myapp/base.html'%}
+{% load static%}
+{% block main %}
+<!-- home section starts  -->
+
+<section class="home" id="home" style="background:url('{% static "img/banner-bg.jpg" %}');">
+
+    <div class="row">
+
+        <div class="content">
+            <h3>Online Library</h3>
+            <p>Buxoro viloyati Shofirkon tumanidagi 16-umumiy o'rta ta'lim maktabining shaxsiy online kutubxonasi. </p>
+            <a href="#" class="btn">Read more</a>
+        </div>
+
+        <div class="swiper books-slider">
+            <div class="swiper-wrapper">
+                <a href="#" class="swiper-slide"><img src="../../static/img/book-1.png" alt=""></a>
+                <a href="#" class="swiper-slide"><img src="../../static/img/book-2.png" alt=""></a>
+                <a href="#" class="swiper-slide"><img src="../../static/img/book-3.png" alt=""></a>
+                <a href="#" class="swiper-slide"><img src="../../static/img/book-4.png" alt=""></a>
+                <a href="#" class="swiper-slide"><img src="../../static/img/book-5.png" alt=""></a>
+                <a href="#" class="swiper-slide"><img src="../../static/img/book-6.png" alt=""></a>
+            </div>
+            <img src="{% static 'img/stand.png' %}" class="stand" alt="">
+        </div>
+
+    </div>
+
+</section>
+
+<!-- home section ense  -->
+
+<!-- icons section starts  -->
+
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-book"></i>
+        <div class="content">
+            <h3>Kitoblar</h3>
+            <p>32</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-headset"></i>
+        <div class="content">
+            <h3>Audio kitoblar</h3>
+            <p>10</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-atlas"></i>
+        <div class="content">
+            <h3>Online Kitoblar</h3>
+            <p>20</p>
+        </div>
+    </div>
+
+    <!-- <div class="icons">
+        <i class="fas fa-headset"></i>
+        <div class="content">
+            <h3>24/7 support</h3>
+            <p>call us anytime</p>
+        </div>
+    </div> -->
+
+</section>
+
+<!-- icons section ends -->
+
+<!-- featured section starts  -->
+
+
+<section class="featured" id="featured">
+
+    <h1 class="heading"> <span>books</span> </h1>
+        
+ 
+    <div class="swiper featured-slider">
+
+        <div class="swiper-wrapper">
+        {% for x in object_list %}
+            <div class="swiper-slide box">
+                <div class="icons">
+                    <a href="#" class="fas fa-search"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div class="image">
+                    <img src="{{ x.photo.url }}" alt="">
+                </div>
+                <div class="content">
+                    <h3>{{ x.title }}</h3>
+                    <div class="price">{{ x.author_name }}</div>
+                    <a href="{% url 'detail' x.slug %}" class="btn">Read more</a>
+                </div>
+            </div>
+
+            {% endfor %}
+
+            
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+    </div>
+
+</section>
+
+<!-- featured section ends -->
+
+<!-- newsletter section starts -->
+
+<section class="newsletter" style="background:url('{% static 'img/letter-bg.jpg' %}') no-repeat; background-size:cover;background-position: center;background-attachment: fixed;">
+
+    <form action="">
+        <h3>subscribe for latest updates</h3>
+        <input type="email" name="" placeholder="enter your email" id="" class="box">
+        <input type="submit" value="subscribe" class="btn">
+    </form>
+
+</section>
+
+<!-- newsletter section ends -->
+
+<!-- arrivals section starts  -->
+
+<section class="arrivals" id="arrivals">
+
+    <h1 class="heading"> <span>Audio Kitoblar</span> </h1>
+
+    <div class="swiper arrivals-slider">
+
+        <div class="swiper-wrapper">
+            {% for v in audio %}
+            <a href="{% url 'detail_audio' v.slug %} " class="swiper-slide box">
+                <div class="image" style="display: block;">
+                    <img src="{{ v.photo.url }}" alt="">
+                </div>
+                <div class="content" style="display: block">
+                    <h3>{{ v.title }}</h3>
+                    <div class="price">{{ v.author_name }}</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+<!-- arrivals section ends -->
+
+<!-- deal section starts  -->
+
+<section class="deal">
+
+    <div class="content">
+        <h3>Haftasiga bitta kitob</h3>
+        <h1>Aksiyasi</h1>
+        <p>Kitob ko`rmagan kalla giyoh unmagan dala</p>
+        <a href="#" class="btn">Read more</a>
+    </div>
+
+    <div class="image">
+        <img src="{% static 'img/deal-img.jpg' %}" alt="">
+    </div>
+
+</section>
+
+<!-- deal section ends -->
+
+<!-- reviews section starts  -->
+
+<section class="reviews" id="reviews">
+
+    <h1 class="heading"> <span>Maktab Rahbarlari</span> </h1>
+
+    <div class="swiper reviews-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide box">
+                <img src="{% static 'img/surayo.jpg' %}" alt="">
+                <h3>Yusupova Surayyo</h3>
+                <small>Direktor</small>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <img src="{% static 'img/shavkat.jpg' %}" alt="">
+                <h3>Qodirov Shavkat</h3>
+                <small>MMIBDO`</small>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <img src="{% static 'img/sayora.jpg' %}" alt="">
+                <h3>Saidova Sayyora</h3>
+                <small>O`IBDO`</small>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <img src="{% static 'img/dilobar.jpg' %}" alt="">
+                <h3>Naimova Dilobar</h3>
+                <small>O`IBDO`</small>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            <div class="swiper-slide box">
+                <img src="{% static 'img/hulkar.jpg' %}" alt="">
+                <h3>Qodirova Hulkar</h3>
+                <small>MMIBDO`</small>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil ipsa placeat. Aperiam at sint, eos ex similique facere hic.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+</section>
+
+<!-- reviews section ends -->
+
+<!-- blogs section starts  -->
+
+<section class="blogs" id="blogs">
+
+    <h1 class="heading"> <span>Maktab yangiliklari</span> </h1>
+
+    <div class="swiper blogs-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide box">
+                <div class="image">
+                    <img src="image/blog-1.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3>blog title goes here</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="image">
+                    <img src="image/blog-2.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3>blog title goes here</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="image">
+                    <img src="image/blog-3.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3>blog title goes here</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="image">
+                    <img src="image/blog-4.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3>blog title goes here</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <div class="image">
+                    <img src="image/blog-5.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h3>blog title goes here</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, odio.</p>
+                    <a href="#" class="btn">read more</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- blogs section ends -->
+
+<!-- footer section starts  -->
+{% endblock%}

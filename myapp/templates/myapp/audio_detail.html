@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Online Boot Store Website Design Tutorial</title>
+{##}
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .vohid{margin:auto;
+    width: 70%;
+    height: auto;
+    border:2px solid black;
+    margin-top: 20px}
+        .vohid1{
+            display: flex;
+            justify-content: space-evenly;
+            margin: 10px 10px;
+        }
+        .date{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 5px;
+            font-size: 15px;
+        }
+        .font-content{
+            font-size:15px ;
+        }
+        @media (max-width: 600px){
+            .online{
+                display: inline-block;
+            }
+        }
+        @media (max-width: 500px) {
+            .vohid1{
+                display: block;
+            }
+            .date{
+                display: block;
+                margin: auto;
+            }
+            .date code{
+                display: block;
+            }
+            audio{
+                width: 170px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <div class="header-1">
+
+        <a href="#" class="logo"> <i class="fas fa-book"></i> Library </a>
+
+        <form action="" class="search-form">
+            <input type="search" name="search" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="#" style="color: #27ae60;font-weight: bold;">Admin</a>
+            <div id="login-btn" class="fas fa-user"></div>
+        </div>
+
+    </div>
+
+    <div class="header-2">
+        <nav class="navbar">
+           <a href="{% url 'home' %}">home</a>
+            <a href="{% url 'book' %}">Books</a>
+            <a href="{% url 'jasur' %}">Audio Books</a>
+            <a href="{% url 'home' %}#featured">featured book</a>
+            <a href="{% url 'home' %}#arrivals">Aksiyalar</a>
+            <a href="{% url 'home' %}#reviews">Maktab rahbarlari</a>
+            <a href="{% url 'home' %}#blogs">Yangiliklar</a>
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'create' %}">Create</a>
+            <a href="{% url 'audio'%}">Audio_Create</a>
+            {% endif %}
+        </nav>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- bottom navbar  -->
+
+<nav class="bottom-navbar">
+  <a href="{% url 'home' %}" class="fas fa-home"></a>
+    <a href="{% url 'book' %}" class="fas fa-book"></a>
+    <a href="{% url 'jasur' %}" class="fas fa-headset"></a>
+</nav>
+
+<!-- login form  -->
+
+<div class="login-form-container">
+
+    <div id="close-login-btn" class="fas fa-times"></div>
+
+
+</div>
+
+<main class="container " id="main p-xl-2">
+
+        <div class="card vohid p-2 m-3" >
+            <div class="info d-flex date justify-content-between p-2 bg-light my-2" >
+                <span>categoriya: <b><i style="color: red">{{ object.categories|title }}</i></b></span>
+                <code>date:{{ object.update_time  | date:'SHORT_DATE_FORMAT' }} {{ object.update_time  | time:"H:i:s" }}</code>
+            </div>
+            <div class="card_women d-flex vohid1 ">
+                <div class="card-image">
+                    <img  style="margin-right: 10px;max-width:150px"src="{{ object.photo.url }}" alt="{{ x.title }}">
+                </div>
+                <div class="title p-2">
+                    <h1>{{ object.title }}</h1>
+                    <p class="font-content">{{ object.content }}</p><br><br>
+                    {% for b in object.audio.all %}
+                        <h4>{{ b.title }}</h4>
+                    <audio src="{{ b.audio.url }}" style="display: block;max-width: 300px;" controls></audio><br>
+                        <a href="#" style="width: 65px;height: 15px;border-radius: 2px;background:#045aaf;color: #f7f7f7;font-weight: bold;font-size: 15px;padding: 5px;border-radius: 10px; " download="{{ b.audio.url }}">Yuklab olish</a>
+                        <br><br>
+                    {% endfor %}
+                    <br><br>
+
+                </div>
+            </div>
+
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{% url 'audio_date' object.slug %}" style="width: 65px;height: 15px;border-radius: 2px;background:#054f03;color: #f7f7f7;font-weight: bold;font-size: 15px;padding: 1px;border-radius: 10px;">Yangilash</a>
+            <a href="{% url 'delete_audio' object.slug %}" style="width: 65px;height: 15px;border-radius: 2px;background:#f10810;color: #f7f7f7;font-weight: bold;font-size: 15px;padding: 1px;border-radius: 10px;">o`chirish</a>
+            {% endif %}
+        </div>
+     </main>
+
+
+
+
+
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>our locations</h3>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Buxara</a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Andijan </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Tashkent </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Navaiy</a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Samarkand</a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> featured </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> arrivals </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> reviews </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> blogs </a>
+        </div>
+
+        <div class="box">
+            <h3>extra links</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> account info </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> ordered items </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> privacy policy </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> payment method </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> our serivces </a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +99893-452-52-79</a>
+            <a href="#"> <i class="fas fa-phone"></i> +99893-472-18-79</a>
+            <a href="#"> <i class="fas fa-envelope"></i> abduvohid118@gmail.com </a>
+            <img src="{% static 'img/worldmap.png' %}" class="map" alt="">
+        </div>
+
+    </div>
+
+    <!-- <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div> -->
+
+
+
+</section>
+
+<!-- footer section ends -->
+
+<!-- loader  -->
+
+<!-- <div class="loader-container">
+    <img src="image/loader-img.gif" alt="">
+</div> -->
+{#<script>#}
+{#    alert('Diqqat Sayt ro`yihatdan o`tganlar uchun ishlaydi!!!')#}
+{#</script>#}
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<!-- custom js file link  -->
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
